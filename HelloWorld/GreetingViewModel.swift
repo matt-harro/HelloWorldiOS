@@ -8,7 +8,7 @@
 import Foundation
 
 class GreetingViewModel: ObservableObject {
-//    @Published var greeting: String = "Hello, World!"
-    @Published var greeting: String = "Fail!"
+    @Published var greeting: String = "Hello, World!"
+//    @Published var greeting: String = "Fail!"
 }
 
