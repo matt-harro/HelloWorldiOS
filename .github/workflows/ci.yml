@@ -33,7 +33,7 @@ jobs:
           xcodebuild clean build test \
             -project HelloWorld.xcodeproj \
             -scheme HelloWorld \
-            -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.2' \
+            -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.5' \
             -derivedDataPath Build/DerivedData \
             CODE_SIGNING_ALLOWED=NO \
             -enableCodeCoverage YES | xcpretty
