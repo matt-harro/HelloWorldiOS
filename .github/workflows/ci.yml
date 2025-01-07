@@ -34,12 +34,25 @@ jobs:
             -project HelloWorldApp.xcodeproj \
             -scheme HelloWorldApp \
             -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.2' \
+            -derivedDataPath Build/DerivedData \
             CODE_SIGNING_ALLOWED=NO \
             -enableCodeCoverage YES | xcpretty
 
       - name: Check Test Results
         run: |
-          TEST_RESULTS=$(find ~/Library/Developer/Xcode/DerivedData -name "*.xcresult")
+          # Locate test results
+          TEST_RESULTS=$(find Build/DerivedData -name "*.xcresult")
+
+          # Log found results
+          echo "Test results found at: $TEST_RESULTS"
+
+          # Fail if no results found
+          if [ -z "$TEST_RESULTS" ]; then
+            echo "No test results found!"
+            exit 1
+          fi
+
+          # Analyze test results for failures
           xcrun xcresulttool get --path "$TEST_RESULTS" --format json > results.json
           if grep -q '"failureSummaries"' results.json; then
             echo "Tests failed!"
@@ -50,4 +63,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: ~/Library/Developer/Xcode/DerivedData/**/Logs/Test/*.xcresult
+          path: Build/DerivedData/**/Logs/Test/*.xcresult
