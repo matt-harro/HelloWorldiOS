@@ -32,7 +32,7 @@ jobs:
           set -eo pipefail &&
           xcodebuild clean build test \
             -project HelloWorld.xcodeproj \
-            -scheme HelloWorldApp \
+            -scheme HelloWorld \
             -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.2' \
             -derivedDataPath Build/DerivedData \
             CODE_SIGNING_ALLOWED=NO \
