@@ -31,7 +31,7 @@ jobs:
         run: |
           set -eo pipefail &&
           xcodebuild clean build test \
-            -project HelloWorldApp.xcodeproj \
+            -project HelloWorld.xcodeproj \
             -scheme HelloWorldApp \
             -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.2' \
             -derivedDataPath Build/DerivedData \
