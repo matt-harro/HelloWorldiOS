@@ -40,19 +40,12 @@ jobs:
 
       - name: Check Test Results
         run: |
-          # Locate test results
           TEST_RESULTS=$(find Build/DerivedData -name "*.xcresult")
-
-          # Log found results
           echo "Test results found at: $TEST_RESULTS"
-
-          # Fail if no results found
           if [ -z "$TEST_RESULTS" ]; then
             echo "No test results found!"
             exit 1
           fi
-
-          # Analyze test results for failures
           xcrun xcresulttool get --path "$TEST_RESULTS" --format json > results.json
           if grep -q '"failureSummaries"' results.json; then
             echo "Tests failed!"
